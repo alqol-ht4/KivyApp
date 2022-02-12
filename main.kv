@@ -1,0 +1,162 @@
+<TestsHomeWidget>:
+	orientation: 'vertical'
+
+<TestsMoreWidget>:
+	orientation: 'vertical'
+
+
+<TestDrawer>:
+
+	orientation: 'vertical'
+
+	AsyncImage:
+		source: root.source
+
+	GridLayout:
+		rows:2
+		id: options_layout
+
+		Button: 
+			text: "Button 1"
+
+		Button: 
+			text: "Button 2"
+
+		Button: 
+			text: "Button 3"
+
+		Button: 
+			text: "Button 4"
+
+
+<LessonDrawer>:
+	orientation: 'vertical'
+	
+	AsyncImage:
+		id: lesson_image
+		source: root.source
+
+	Button:
+		id: lesson_description
+		text: root.description
+		size_hint_y: .2
+		on_release: root.method(self)
+
+<LessonsHomeWidget>:
+	orientation: 'vertical'
+
+	#Type code here#
+
+<LessonsMoreWidget>:
+	cols: 1
+    height: app.window
+    size_hint_y: None
+    spacing: 0
+
+	Button:
+		text: 'Back button'
+		on_release: app.lessons_back_button(self)
+		
+	#Type code here#
+
+
+<LessonDescriptionWidget>:
+	
+	cols: 1
+	height: app.window
+	size_hint_y: None
+	spacing: 5
+
+	BoxLayout:
+		orientation: 'vertical'
+
+		AsyncImage:
+
+			source: root.source
+
+		Button:
+
+			text: root.description
+
+
+<RootWidget>:
+	id: manager
+
+	Screen:
+		name: 'home_screen'
+
+		MDBottomNavigation:
+			id: bottom_navigation
+
+
+
+			MDBottomNavigationItem:  							#Lessons item
+				name: 'lessons_item'
+				id: lessons_bottom_navigation_item
+				text: 'Lessons'
+
+				ScreenManager:  							#Lessons item screenmanager
+					id: lessons_screens_manager
+
+					Screen:   								#Lessons first screen
+
+						name: 'lessons_home_screen'
+						id: lessons_home_screen
+
+						LessonsHomeWidget: 					#Lessons home widget
+							id: lessons_home_widget
+
+					Screen:  								#Lessons second screen
+
+						name: 'lessons_more_screen'
+						id: lessons_more_screen
+
+						ScrollView:
+							do_scroll_x: False
+							do_scroll_y: True
+
+							LessonsMoreWidget: 					#Lessons more widget
+								id: lessons_more_widget
+
+					Screen:
+
+						name: 'lesson_decription_screen'
+						id: lesson_description_screen
+
+						LessonDescriptionWidget:
+							id: lesson_description_widget
+
+
+
+			MDBottomNavigationItem:
+				name: 'tests_item'
+				id: tests_bottom_navigation_item
+				text: 'Tests'
+
+				ScreenManager:
+					id: test_screens_manager
+
+					Screen:
+						name: 'tests_home_screen'
+						id: tests_home_screen
+
+						TestsHomeWidget:
+							id: tests_home_widget
+
+					Screen:
+						name: 'tests_more_screen'
+						id: 'tests_more_screen'
+
+						TestsMoreWidget:
+							id: tests_more_widget
+
+
+			MDBottomNavigationItem:
+				name: 'settings_item'
+				id: settings_bottom_navigation_item
+				text: 'Settings'
+
+
+RootWidget:
+
+				
